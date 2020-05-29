@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+// node run-bot --user pasque21 --host 188.40.151.195 --port 25565 --mcversion 1.14.4 --walkloop 2 digloop 2
+
+const argv = require('yargs')
+  .option('user', {
+    alias: 'u',
+    describe: 'username'
+  })
+  .option('password', {
+    alias: 'pw',
+    describe: 'password'
+  })
+  .option('host', {
+    alias: 'h',
+    describe: 'host'
+  })
+  .option('port', {
+    alias: 'p',
+    describe: 'port'
+  })
+  .option('mcversion', {
+    alias: 'mcv',
+    describe: 'Minecraft version 1.14.4'
+  })
+  .option('walkloop', {
+    alias: 'wl',
+    number: true,
+    default: 10,
+    describe: 'Number of times the bot walks before digging'
+  })
+  .option('digloop', {
+    alias: 'dl',
+    number: true,
+    default: 1000,
+    describe: 'Number of times the bot dig and fly'
+  })
+  .demandOption(
+    [
+      'user',
+      'host', 
+      'port', 
+      'mcversion'
+    ], 
+    'Please provide these arguments to work with this tool'
+  )
+  .help()
+  .argv;
+
+
+const createBot = require('./bot');
+const {getRandomInt, getSymbol, wait} = require('./utils');
+const { digAround, fly, goAround} = require('./actions');
+
+
+console.log('Start bot with the args:');
+console.log('* username:', argv.user);
+console.log('* host:', argv.host);
+console.log('* port:', argv.port);
+console.log('* mcversion:', argv.mcversion);
+console.log('* walkloop:', argv.walkloop);
+console.log('* digloop:', argv.digloop);
+
+const bot = createBot({
+  username: argv.user,
+  password: argv.password,
+  host: argv.host,
+  port: argv.port,
+  version: argv.mcversion,
+  verbose: true, 
+});
+
+bot.on('spawn', async function() {
+  await wait(10000);
+  
+  const initial = bot.entity.position;
+  console.log(`bot spawned at: ${initial}`);
+  const seedDir = getSymbol();
+  const optsWalkAround = {};
+  if (seedDir > 0) {
+    optsWalkAround.xSymbol = seedDir;
+  } else {
+    optsWalkAround.zSimbol = seedDir;
+  }
+
+  console.log('The direction is: ');
+  console.log(optsWalkAround);
+
+  for (let index = 0; index < argv.walkloop; index++) {
+    await goAround(bot, optsWalkAround);
+  }
+
+  for (let index = 0; index < argv.digloop; index++) {
+    const deep = getRandomInt(2, 20);
+    await digAround(bot, deep, 5);
+    const { position } = bot.entity;
+    const upTo = 125 - position.y; 
+    const loops = getRandomInt(20, 50);
+    await fly(bot, loops, upTo);
+    bot.creative.stopFlying();
+    await wait(5000);
+  }
+});

@@ -1,0 +1,28 @@
+{
+  "name": "ak-bots",
+  "version": "1.0.0",
+  "description": "Create Minecraft bots to perform load tests",
+  "main": "run-bots",
+  "bin": {
+    "mcbot": "./run-bot",
+    "mcbots": "./run-bots"
+  },
+  "dependencies": {
+    "minecraft-data": "^2.51.0",
+    "mineflayer": "^2.15.0",
+    "mineflayer-blockfinder": "^0.0.7",
+    "mineflayer-navigate": "^0.0.10",
+    "mineflayer-scaffold": "^1.0.0",
+    "shortid": "^2.2.15",
+    "vec3": "^0.1.4",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

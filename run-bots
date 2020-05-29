@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+
+const { spawn } = require('child_process');
+const shortid = require('shortid');
+
+// node run-bots --host 188.40.151.195 --port 25565 --mcversion 1.14.4
+
+const argv = require('yargs')
+  .option('userprefix', {
+    alias: 'up',
+    default: 'pasque',
+    describe: 'user prefix'
+  })
+  .option('host', {
+    alias: 'h',
+    describe: 'host'
+  })
+  .option('port', {
+    alias: 'p',
+    describe: 'port'
+  })
+  .option('mcversion', {
+    alias: 'mcv',
+    describe: 'Minecraft version 1.14.4'
+  })
+  .option('walkloop', {
+    alias: 'wl',
+    number: true,
+    default: 100,
+    describe: 'Number of times the bot walks before digging'
+  })
+  .option('digloop', {
+    alias: 'dl',
+    number: true,
+    default: 1000,
+    describe: 'Number of times the bot dig and fly'
+  })
+  .option('bots', {
+    alias: 'b',
+    number: true,
+    default: 5,
+    describe: 'Number of bots to create in the server'
+  })
+  .demandOption(
+    [
+      'host', 
+      'port', 
+      'mcversion'
+    ], 
+    'Please provide these arguments to work with this tool'
+  )
+  .help()
+  .argv;
+
+async function main() {
+  console.log('Start bots with the args:');
+  console.log('* userprefix:', argv.userprefix);
+  console.log('* host:', argv.host);
+  console.log('* port:', argv.port);
+  console.log('* mcversion:', argv.mcversion);
+  console.log('* walkloop:', argv.walkloop);
+  console.log('* digloop:', argv.digloop);
+  console.log('* bots:', argv.bots);
+
+  const args = process.argv.slice(2);
+  for (let index = 0; index < argv.bots; index++) {
+    const username = `${argv.userprefix}_${shortid.generate()}`;
+    console.log('Creating the bot', username);
+    spawn(
+      './run-bot', 
+      args.concat([
+        '--user',
+        username
+      ]),
+      {
+        detached: false,
+        stdio: 'inherit'
+      }
+    );
+    await new Promise((r) => setTimeout(r, 10000));
+  }
+}
+
+main();
+
