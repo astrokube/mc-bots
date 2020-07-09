@@ -1,8 +1,8 @@
 {
   "name": "ak-bots",
   "version": "1.0.0",
-  "description": "Create Minecraft bots to perform load tests",
-  "main": "run-bots",
+  "description": "Run Minecraft bots to perform load tests",
+  "main": "./bin/run-bots",
   "bin": {
     "mcbot": "./bin/run-bot",
     "mcbots": "./bin/run-bots"

@@ -1,5 +1,11 @@
 # ak-bots
 
+Run Minecraft bots to perform load tests.
+
+## Requirements
+
+Tested on Minecraft 1.14.4. 
+
 ## Install
 
 ```sh
