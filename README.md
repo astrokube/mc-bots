@@ -13,13 +13,13 @@ To run one bot:
 
 ```sh
 # Replace akbots by your image name
-$ sudo docker run akbots mcbot \
+$ sudo docker run --rm --net=host akbots mcbot \
 --user [username] \
 --host [minecraft host] \
 --port [port] \
 --mcversion [version]
 
-$ sudo docker run akbots mcbot \
+$ sudo docker run --rm --net=host akbots mcbot \
 --user [username] \
 --host [minecraft host] \
 --port [port] \
@@ -27,7 +27,7 @@ $ sudo docker run akbots mcbot \
 --walkloop [walkloop] \
 --digloop [digloop]
 
-$ sudo docker run akbots mcbot \
+$ sudo docker run --rm --net=host akbots mcbot \
 --user [username] \
 --password [password] \
 --host [minecraft host] \
@@ -39,13 +39,13 @@ To run many bots:
 
 ```sh
 # Replace akbots by your image name
-$ sudo docker run akbots mcbots \
+$ sudo docker run --rm --net=host akbots mcbots \
 --host [minecraft host] \
 --port [port] \
 --mcversion [minecraft version]  \
 --bots [number of bots]
 
-$ sudo docker run akbots mcbots \
+$ sudo docker run --rm --net=host akbots mcbots \
 --host [minecraft host] \
 --port [port] \
 --mcversion [minecraft version] \
@@ -53,7 +53,7 @@ $ sudo docker run akbots mcbots \
 --walkloop [walkloop] \
 --digloop [digloop]
 
-$ sudo docker run akbots mcbots \
+$ sudo docker run --rm --net=host akbots mcbots \
 --userprefix [userprefix] \
 --host [minecraft host] \
 --port [port] \
@@ -64,10 +64,12 @@ $ sudo docker run akbots mcbots \
 ## Help
 
 ```sh
-$ sudo docker run akbots mcbot --help
+# Replace akbots by your image name
+$ sudo docker run --rm --net=host akbots mcbot --help
 ```
 
 ```sh
-$ sudo docker run akbots mcbots --help
+# Replace akbots by your image name
+$ sudo docker run --rm --net=host akbots mcbots --help
 ```
 
