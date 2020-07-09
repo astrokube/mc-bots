@@ -179,27 +179,3 @@ bot.on("spawn", async function() {
 
 
 bot.on("error", err => console.log(err));
-
-
-
-// await wait(100);
-  
-// bot.creative.stopFlying();
-// await wait(5000);
-// await digAround(bot, 10, 5);
-// await wait(100);
-// await fly(bot, 3, 20);
-// bot.creative.stopFlying();
-// await wait(5000);
-// await digAround(bot, 10, 5);
-// await wait(100);
-// await fly(bot, 3, 20);
-// bot.creative.stopFlying();
-// await wait(5000);
-// await digAround(bot, 10, 5);
-// await wait(100);
-// await fly(bot, 3, 20);
-// bot.creative.stopFlying();
-
-// andar hasta un sitio random
-// comenzar a hacer agujeros y edificar

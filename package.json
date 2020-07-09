@@ -4,8 +4,8 @@
   "description": "Create Minecraft bots to perform load tests",
   "main": "run-bots",
   "bin": {
-    "mcbot": "./run-bot",
-    "mcbots": "./run-bots"
+    "mcbot": "./bin/run-bot",
+    "mcbots": "./bin/run-bots"
   },
   "dependencies": {
     "minecraft-data": "^2.51.0",
