@@ -45,7 +45,7 @@ async function digAround(bot, deep, aroundLimit) {
 async function goUp(bot, h) {
     let positionY = -99999;
     let finalPosition = bot.entity.position.offset(0, h, 0).y;
-    console.log('Start to fly pos:');
+    console.log("Start to fly pos:");
     console.log(finalPosition);
     while (finalPosition >= positionY) {
         const position = bot.entity.position.floored();
@@ -57,7 +57,7 @@ async function goUp(bot, h) {
         ));
         positionY = bot.entity.position.floored().y;
     }
-    console.log('Finish to fly');
+    console.log("Finish to fly");
 }
 
 
@@ -87,7 +87,7 @@ async function goAround(bot, { xSymbol, zSimbol }) {
     const initial = bot.entity.position.floored();
     let results;
 
-    while (true) {
+    while (true) { // eslint-disable-line
         const xPosition = getRandomInt(RANGE_MIN, RANGE_MAX) * (xSymbol || getSymbol());
         const zPosition = getRandomInt(RANGE_MIN, RANGE_MAX) * (zSimbol || getSymbol());
         console.log("Goind around to: (x:", xPosition, "z:", zPosition, ")");
@@ -100,10 +100,10 @@ async function goAround(bot, { xSymbol, zSimbol }) {
         bot.chat(`Start to goAround. goal: (${to.x}, ${to.y}, ${to.z})`);
     
         results = bot.navigate.findPathSync(to);
-        if (results.status === 'noPath') {
+        if (results.status === "noPath") {
             const upTo = 125 - initial.y; 
             const loops = getRandomInt(20, 50);
-            await fly(bot, loops, upTo)
+            await fly(bot, loops, upTo);
             bot.creative.stopFlying();
             await wait(5000);
         } else {
